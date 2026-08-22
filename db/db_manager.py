@@ -928,6 +928,56 @@ class VenancioDB(StoreDB):
     DB_ENV_KEY = "DATABASE_URL_VENANCIO"
 
 
+class IndianaDB(StoreDB):
+    STORE_ID   = "indiana"
+    DB_ENV_KEY = "DATABASE_URL_INDIANA"
+
+
+class GloboDB(StoreDB):
+    STORE_ID   = "globo"
+    DB_ENV_KEY = "DATABASE_URL_GLOBO"
+
+
+class PermanenteDB(StoreDB):
+    STORE_ID   = "permanente"
+    DB_ENV_KEY = "DATABASE_URL_PERMANENTE"
+
+
+class MinasBrasilDB(StoreDB):
+    STORE_ID   = "minasbrasil"
+    DB_ENV_KEY = "DATABASE_URL_MINASBRASIL"
+
+
+class AnossaDrogariaDB(StoreDB):
+    STORE_ID   = "anossadrogaria"
+    DB_ENV_KEY = "DATABASE_URL_ANOSSADROGARIA"
+
+
+class ModernaDB(StoreDB):
+    STORE_ID   = "moderna"
+    DB_ENV_KEY = "DATABASE_URL_MODERNA"
+
+
+class SantaLuciaDB(StoreDB):
+    STORE_ID   = "santalucia"
+    DB_ENV_KEY = "DATABASE_URL_SANTALUCIA"
+
+
+class AraujoDB(StoreDB):
+    STORE_ID   = "araujo"
+    DB_ENV_KEY = "DATABASE_URL_ARAUJO"
+
+
+class CatarinenseDB(StoreDB):
+    STORE_ID   = "catarinense"
+    DB_ENV_KEY = "DATABASE_URL_CATARINENSE"
+
+
+class CallfarmaDB(StoreDB):
+    STORE_ID   = "callfarma"
+    DB_ENV_KEY = "DATABASE_URL_CALLFARMA"
+
+
 # Registry used by the CLI
 STORE_REGISTRY: Dict[str, type] = {
     "drogaleste":       DrogalesteDB,
@@ -973,6 +1023,16 @@ STORE_REGISTRY: Dict[str, type] = {
     "redesuperpopular": RedeSuperPopularDB,
     "saojoao":          SaoJoaoDB,
     "venancio":         VenancioDB,
+    "indiana":          IndianaDB,
+    "globo":            GloboDB,
+    "permanente":       PermanenteDB,
+    # minasbrasil DROPPED 2026-08-21 (10h/59k, no bulk EAN source) — class kept dormant below
+    "anossadrogaria":   AnossaDrogariaDB,
+    "moderna":          ModernaDB,
+    "santalucia":       SantaLuciaDB,
+    "araujo":           AraujoDB,
+    "catarinense":      CatarinenseDB,
+    "callfarma":        CallfarmaDB,
 }
 
 
