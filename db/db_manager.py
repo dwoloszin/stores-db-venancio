@@ -978,6 +978,16 @@ class CallfarmaDB(StoreDB):
     DB_ENV_KEY = "DATABASE_URL_CALLFARMA"
 
 
+class DrogasmilDB(StoreDB):
+    STORE_ID   = "drogasmil"
+    DB_ENV_KEY = "DATABASE_URL_DROGASMIL"
+
+
+class RosarioDB(StoreDB):
+    STORE_ID   = "rosario"
+    DB_ENV_KEY = "DATABASE_URL_ROSARIO"
+
+
 # Registry used by the CLI
 STORE_REGISTRY: Dict[str, type] = {
     "drogaleste":       DrogalesteDB,
@@ -1033,6 +1043,8 @@ STORE_REGISTRY: Dict[str, type] = {
     "araujo":           AraujoDB,
     "catarinense":      CatarinenseDB,
     "callfarma":        CallfarmaDB,
+    "drogasmil":        DrogasmilDB,
+    "rosario":          RosarioDB,
 }
 
 
