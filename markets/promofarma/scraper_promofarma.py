@@ -1,7 +1,7 @@
 """
-scraper_pensefarma.py — Scraper for Pense Farma (https://www.pensefarma.com.br)
+scraper_promofarma.py — Scraper for Promo Farma (https://www.promofarma.com.br)
 
-Platform  : VTEX IO (account `pensefarma`).
+Platform  : VTEX IO (account `promofarma`).
             NOTE: ListPrice is the PMC (max consumer price) reference; Price is the
             real (heavily discounted) selling price -> regular=ListPrice, promo=Price.
 API       : /api/catalog_system/pub/products/search/
@@ -12,14 +12,14 @@ Pagination: _from / _to, 50 items per page (0-indexed)
 EAN       : available inline at items[0].ean — ~100% coverage
 
 Category note:
-    fq filtering works. ~229 leaf categories, ~15.7k products, 232 leaves, NONE over the 2550
+    fq filtering works. ~229 leaf categories, ~22.8k products, 312 leaves, NONE over the 2550
     cap (biggest leaf ~1415, verified 2026-08-25) -> plain Drogal-style leaf walk,
     no price-range subdivision needed.
 
 Usage:
-    python -m markets.pensefarma.scraper_pensefarma              # scrape -> DB
-    python -m markets.pensefarma.scraper_pensefarma --limit 500  # test run -> DB
-    python -m markets.pensefarma.scraper_pensefarma --csv        # scrape -> DB + CSV
+    python -m markets.promofarma.scraper_promofarma              # scrape -> DB
+    python -m markets.promofarma.scraper_promofarma --limit 500  # test run -> DB
+    python -m markets.promofarma.scraper_promofarma --csv        # scrape -> DB + CSV
 """
 
 import csv
@@ -33,8 +33,8 @@ import requests
 
 sys.stdout.reconfigure(line_buffering=True)
 
-BASE_URL  = "https://www.pensefarma.com.br"
-STORE_ID  = "pensefarma"
+BASE_URL  = "https://www.promofarma.com.br"
+STORE_ID  = "promofarma"
 PAGE_SIZE = 50    # VTEX max per request
 VTEX_CAP  = 2549  # VTEX hard ceiling: _to cannot exceed this
 DELAY     = 0.2   # seconds between requests
@@ -341,7 +341,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Scrape Pense Farma -> PostgreSQL (DB is always written; CSV is optional)"
+        description="Scrape Promo Farma -> PostgreSQL (DB is always written; CSV is optional)"
     )
     parser.add_argument("--limit",  type=int, default=None, help="Stop after N products (test)")
     parser.add_argument("--csv",    action="store_true",    help="Also export a CSV file after scrape")
@@ -349,10 +349,10 @@ if __name__ == "__main__":
     parser.add_argument("--env",    type=str, default=".env", help=".env file path")
     args = parser.parse_args()
 
-    from db.db_manager import PenseFarmaDB, load_env
+    from db.db_manager import PromoFarmaDB, load_env
     load_env(args.env)
 
-    db    = PenseFarmaDB()
+    db    = PromoFarmaDB()
     stats = scrape(db, limit=args.limit)
     db.close()
 
@@ -363,6 +363,6 @@ if __name__ == "__main__":
 
     if args.csv or args.output:
         output_dir = args.output or "."
-        db2 = PenseFarmaDB()
+        db2 = PromoFarmaDB()
         db2.export(output_dir, tables=["offers"])
         db2.close()
